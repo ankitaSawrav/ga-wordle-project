@@ -1,14 +1,15 @@
 const wordOfTheDay = "hoppy"
-const arrayOFWordOfTheDay = wordOfTheDay.toUpperCase();
-console.log(arrayOFWordOfTheDay);
-
+// const arrayOFWordOfTheDay = wordOfTheDay.toUpperCase();
+// console.log(arrayOFWordOfTheDay);
+// ************logic using inputBOX.
 let attemptCounter = 0;
-function display() {
+function display(keyPressed) {
+    console.log("keyPressed:" + keyPressed)
     attemptCounter  = attemptCounter + 1;
     const userinput = document.getElementById('input').value.toUpperCase();
-    //splitting each letter in the word
+    // splitting each letter in the word
     const newArrayOfletters = userinput.split("");
-    // console.log(newArrayOfletters);
+    console.log(newArrayOfletters);
     if(attemptCounter < 6){
     //to put the word in 1st row in Attempt 1
     const rowDivs = document.querySelector("#row-"+`${attemptCounter}`).children;
@@ -29,7 +30,7 @@ function display() {
                     }
                 }
     }else{
-        alert("You have Exhausted your not of tries")
+        alert(" Your no of tries has been exhausted")
     }   
 }
  //Examples:   
