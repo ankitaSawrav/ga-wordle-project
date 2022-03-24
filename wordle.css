@@ -21,11 +21,11 @@ body {
     border-radius: 12px;
     box-shadow: inset -4px 3px 19px 9px #888888;
     /* to animate change background of keyboard from color1 to color 2 */
-    animation: move 2s infinite;
+    animation: move 5s infinite;
 }
 /* to setting properties of change background of keyboard from color1 to color 2 */
 @keyframes move {
-    from {background-color: rgb(217, 255, 0);}
+    from {background-color: rgb(85, 119, 134);}
     to {background-color: rgb(185, 185, 214);}
   }
 
@@ -67,6 +67,9 @@ button.key.enter {
 h1 {
     text-align: center;
     border-bottom: double;
+}
+h3 {
+    text-align: center;
 }
 .matches {
      background-color: darkgreen;

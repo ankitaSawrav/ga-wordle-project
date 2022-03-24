@@ -1,6 +1,7 @@
 // const wordOfTheDay = "happy";
 // select random word fron "Valid words Array"
-const randomNumber = Math.floor(Math.random()*validWords.length);
+
+const randomNumber = Math.floor(Math.random() * validWords.length);
 console.log(validWords[randomNumber]);
 wordOfTheDay = validWords[randomNumber];
 
@@ -41,50 +42,67 @@ function enterLetter(key) {
     console.log("enter is pressed")
     console.log("attemptCounter" + attemptCounter);
     console.log("letterCounter" + letterCounter)
-    if (letterCounter == 5 ) {
-        const row = document.querySelector("#row-" + `${attemptCounter}`);
-        const selectedRowDivs = row.children;
+    //check for a valid word ................
+    const selectedRow = document.querySelector("#row-" + `${attemptCounter}`);
+    console.log(selectedRow)
+    const currentRowDivChildren = selectedRow.children
+    let inputwordArray = [];
+    for (let i = 0; i < currentRowDivChildren.length; i++) {
+        let letter = currentRowDivChildren[i].textContent;
 
-        for (let i = 0; i < selectedRowDivs.length; i++) {
-            if (arrayOFWordOfTheDay.includes(selectedRowDivs[i].textContent)) {
+        inputwordArray.push(letter)
+    }
+    const inputWord = inputwordArray.join("");
+    console.log(inputWord);
+    if (validWords.includes(inputWord)) {
+        if (letterCounter == 5) {
+            const row = document.querySelector("#row-" + `${attemptCounter}`);
+            const selectedRowDivs = row.children;
 
-                if (arrayOFWordOfTheDay[i] == selectedRowDivs[i].textContent) {
-                    // selectedRowDivs[i].style.backgroundColor = "green";
-                    selectedRowDivs[i].classList.add("matches")
-                    console.log(selectedRowDivs[i].textContent)
-                    tochangekeyboardColor(selectedRowDivs[i].textContent, "matches");
+            for (let i = 0; i < selectedRowDivs.length; i++) {
+                if (arrayOFWordOfTheDay.includes(selectedRowDivs[i].textContent)) {
 
+                    if (arrayOFWordOfTheDay[i] == selectedRowDivs[i].textContent) {
+                        // selectedRowDivs[i].style.backgroundColor = "green";
+                        selectedRowDivs[i].classList.add("matches")
+                        console.log(selectedRowDivs[i].textContent)
+                        tochangekeyboardColor(selectedRowDivs[i].textContent, "matches");
+
+                    } else {
+                        selectedRowDivs[i].style.backgroundColor = "orange";
+                        selectedRowDivs[i].classList.add("presentbutnotinpositon")
+                        tochangekeyboardColor(selectedRowDivs[i].textContent, "presentbutnotinpositon");
+                    }
                 } else {
-                    selectedRowDivs[i].style.backgroundColor = "orange";
-                    selectedRowDivs[i].classList.add("presentbutnotinpositon")
-                    tochangekeyboardColor(selectedRowDivs[i].textContent, "presentbutnotinpositon");
+                    selectedRowDivs[i].style.backgroundColor = "gray";
+                    selectedRowDivs[i].classList.add("absent");
+                    tochangekeyboardColor(selectedRowDivs[i].textContent, "absent");
                 }
-            } else {
-                selectedRowDivs[i].style.backgroundColor = "gray";
-                selectedRowDivs[i].classList.add("absent");
-                tochangekeyboardColor(selectedRowDivs[i].textContent, "absent");
-            }
+            }            
             const allGuessLetterMatches = row.querySelectorAll(".matches");
             console.log(allGuessLetterMatches);
-           
+
             if (allGuessLetterMatches.length == 5) {
                 // alert("YOU WON");
-                disableButton();
+                disableAllKeyButtons();
                 document.getElementById("message").textContent = "Congrats you won!!";
-                
+                createRefreshButton();
+
             }
-            if(attemptCounter == 5 && allGuessLetterMatches.length != 5 ){
+            if (attemptCounter == 5 && allGuessLetterMatches.length != 5) {
                 document.getElementById("message").textContent = " You Lose !!"
-                disableButton();
+                createRefreshButton();
+                disableAllKeyButtons();
             }
+            attemptCounter = attemptCounter + 1;
+            letterCounter = 0;
+            console.log("attemptCounter " + attemptCounter);
+            console.log("letterCounter " + letterCounter);
+        } else {
+            alert("not Enough letters!!")
         }
-        attemptCounter = attemptCounter + 1;
-        letterCounter = 0;
-        console.log("attemptCounter " + attemptCounter);
-        console.log("letterCounter " + letterCounter);
-    } 
-    else {
-        alert("not Enough letters!!")
+    } else {
+        alert("not a valid word");
     }
 }
 
@@ -99,6 +117,7 @@ function deleteLetter(key) {
         console.log("no letter to delete")
     }
 }
+
 function tochangekeyboardColor(keyLetter, value) {
     console.log(keyLetter);
     const keys = document.getElementsByClassName("key");
@@ -110,10 +129,25 @@ function tochangekeyboardColor(keyLetter, value) {
         }
     }
 }
-function disableButton() {
-    const keyElements = document.getElementsByClassName("key") ;         
-                for (const keyElement of keyElements){
-                    keyElement.disabled = true;
-                    
-                }
+
+function disableAllKeyButtons() {
+    const keyElements = document.getElementsByClassName("key");
+    for (const keyElement of keyElements) {
+        keyElement.disabled = true;
+
+    }
+}
+
+function createRefreshButton() {
+    console.log("hi")
+    const messageDivContainer = document.getElementById("modal");
+    console.log(messageDivContainer);
+    const refreshButton = document.createElement("button")
+    refreshButton.classList.add("refesh")
+    refreshButton.textContent = "Refresh"
+    // document.body.appendChild(button);
+    messageDivContainer.appendChild(refreshButton);
+    refreshButton.addEventListener("click", function () {
+        location.reload();
+    })
 }
