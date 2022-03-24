@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- <script defer src="wordle.js"></script> -->
+    <script defer src="wordlewords.js"></script>
     <script defer src="keyboard.js"></script>
+
     <link rel="stylesheet" href="wordle.css">
 </head>
 <body>
@@ -15,6 +17,12 @@
     <input type="text" id="input" maxlength="5" >
     <button class="CheckWordle" onclick="display()">Submit</button>
     </section>  -->
+
+
+    <div class="modal-container">
+        <h2 id="message"></h2>
+    </div>
+        
     <section class="board" id="board">
         <div id="row-1" class ="row">
             <div class="boxes" id="0"></div>
@@ -87,7 +95,7 @@
             </div>
             <div class="row" id="Keyrow-2">
                 <button class="key enter" data-key="Enter">Enter</button>
-                <button class="key del" data-key="del">Delete</button>
+                <button class="key delete" data-key="del">Delete</button>
             </div>
 
 

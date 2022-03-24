@@ -1,95 +1,119 @@
+// const wordOfTheDay = "happy";
+// select random word fron "Valid words Array"
+const randomNumber = Math.floor(Math.random()*validWords.length);
+console.log(validWords[randomNumber]);
+wordOfTheDay = validWords[randomNumber];
 
-const wordOfTheDay = "happy";
 let attemptCounter = 1;
 let letterCounter = 0;
 const arrayOFWordOfTheDay = wordOfTheDay.toUpperCase();
 console.log(arrayOFWordOfTheDay);
- // splitting each letter in the word
+// splitting each letter in the word
 let keyButtons = document.getElementsByClassName('key');
 for (const key of keyButtons) {
-    // console.log(key);
     key.addEventListener("click", function () {
-        console.log(key);
         const keyPressed = key.dataset['key'];
         //checking the row on pressing Enter Key
-        if (keyPressed ==  "Enter"){
-            console.log( "enter is pressed")
-            console.log("attemptCounter"+attemptCounter);
-            console.log("letterCounter"+letterCounter)
-            if(letterCounter == 5){
-                const row = document.querySelector("#row-" + `${attemptCounter}`);
-                const selectedRowDivs = row.children;
-                console.log(selectedRowDivs);
-                
-                for(let i = 0; i < selectedRowDivs.length; i++ ) {
-                    console.log(selectedRowDivs[i].textContent)
-                    if(arrayOFWordOfTheDay.includes(selectedRowDivs[i].textContent)) {
-                        
-                        if(arrayOFWordOfTheDay[i] == selectedRowDivs[i].textContent ){
-                            selectedRowDivs[i].style.backgroundColor = "green";
-                            selectedRowDivs[i].classList.add("matches")                    
-                        }
-                        else{
-                            selectedRowDivs[i].style.backgroundColor = "orange";
-                            selectedRowDivs[i].classList.add("presentbutnotinpositon")
-                        }                       
-                    }else{
-                        selectedRowDivs[i].style.backgroundColor = "gray";
-                        selectedRowDivs[i].classList.add("absent")
-                    }
-                    const allGuessLetterMatches = row.querySelectorAll(".matches");  
-                    console.log(allGuessLetterMatches);  
-                    
-                    //to disable all the child nodes after the word is guessed.
-                    if(allGuessLetterMatches.length==5){
-                      alert("YOU WON");
-                    }
-                    tochangekeyboardColor();     
-                     
-                }  
-            
-            attemptCounter = attemptCounter + 1;
-            letterCounter = 0;
-            console.log("attemptCounter"+attemptCounter);
-            console.log("letterCounter"+letterCounter);
-            }else{
-                alert("not Enough letters!!")    
-            }
-            
-        }else{
+        if (keyPressed == "Enter") {
+            enterLetter(key);
+        } else if (keyPressed == "del") {
+            deleteLetter(key);
+        } else {
             display(keyPressed, key);
-        } 
-             
+        }
     });
 }
 
 
-function display(keyPressed,key) {
+function display(keyPressed, key) {
     console.log("keyPressed:" + keyPressed)
     if (attemptCounter < 6 && letterCounter < 5) {
         //to put the word in 1st row in Attempt 1
         const rowDivs = document.querySelector("#row-" + `${attemptCounter}`).children;
-        // console.log(rowDivs)
-        // console.log(rowDivs[letterCounter]); 
-        rowDivs[letterCounter].textContent = keyPressed ; 
-        console.log("letterCounter: "+letterCounter);
-        console.log("attemptCounter: "+attemptCounter);
+        rowDivs[letterCounter].textContent = keyPressed;
+        // console.log("letterCounter: " + letterCounter);
+        // console.log("attemptCounter: " + attemptCounter);
         letterCounter = letterCounter + 1;
-     }
-}
-function tochangekeyboardColor(){
-    
-    const divMatchesClasses = document.querySelectorAll(".matches");
-    console.log(divMatchesClasses);
-    for(let divMatchesClass of divMatchesClasses){     
-        console.log(divMatchesClass);
-        const valueT = divMatchesClass.textContent;
-        console.log(valueT);
-        const keys = document.getElementsByClassName("key");
-        for(const key of keys){
-            if(key.dataset["key"]==valueT){
-                key.classList.add("matches");
-            }
-        }        
     }
+}
+
+function enterLetter(key) {
+    console.log("enter is pressed")
+    console.log("attemptCounter" + attemptCounter);
+    console.log("letterCounter" + letterCounter)
+    if (letterCounter == 5 ) {
+        const row = document.querySelector("#row-" + `${attemptCounter}`);
+        const selectedRowDivs = row.children;
+
+        for (let i = 0; i < selectedRowDivs.length; i++) {
+            if (arrayOFWordOfTheDay.includes(selectedRowDivs[i].textContent)) {
+
+                if (arrayOFWordOfTheDay[i] == selectedRowDivs[i].textContent) {
+                    // selectedRowDivs[i].style.backgroundColor = "green";
+                    selectedRowDivs[i].classList.add("matches")
+                    console.log(selectedRowDivs[i].textContent)
+                    tochangekeyboardColor(selectedRowDivs[i].textContent, "matches");
+
+                } else {
+                    selectedRowDivs[i].style.backgroundColor = "orange";
+                    selectedRowDivs[i].classList.add("presentbutnotinpositon")
+                    tochangekeyboardColor(selectedRowDivs[i].textContent, "presentbutnotinpositon");
+                }
+            } else {
+                selectedRowDivs[i].style.backgroundColor = "gray";
+                selectedRowDivs[i].classList.add("absent");
+                tochangekeyboardColor(selectedRowDivs[i].textContent, "absent");
+            }
+            const allGuessLetterMatches = row.querySelectorAll(".matches");
+            console.log(allGuessLetterMatches);
+           
+            if (allGuessLetterMatches.length == 5) {
+                // alert("YOU WON");
+                disableButton();
+                document.getElementById("message").textContent = "Congrats you won!!";
+                
+            }
+            if(attemptCounter == 5 && allGuessLetterMatches.length != 5 ){
+                document.getElementById("message").textContent = " You Lose !!"
+                disableButton();
+            }
+        }
+        attemptCounter = attemptCounter + 1;
+        letterCounter = 0;
+        console.log("attemptCounter " + attemptCounter);
+        console.log("letterCounter " + letterCounter);
+    } 
+    else {
+        alert("not Enough letters!!")
+    }
+}
+
+function deleteLetter(key) {
+    console.log(letterCounter);
+    if (letterCounter != 0) {
+        const gettingTheLetterBoxToDeleteLetter = document.querySelector("#row-" + `${attemptCounter}`).children[letterCounter - 1];
+        console.log(gettingTheLetterBoxToDeleteLetter);
+        gettingTheLetterBoxToDeleteLetter.textContent = "";
+        letterCounter = letterCounter - 1;
+    } else {
+        console.log("no letter to delete")
+    }
+}
+function tochangekeyboardColor(keyLetter, value) {
+    console.log(keyLetter);
+    const keys = document.getElementsByClassName("key");
+    for (const key of keys) {
+        if (key.dataset["key"] == keyLetter) {
+            key.removeAttribute("class");
+            key.classList.add("key");
+            key.classList.add(value);
+        }
+    }
+}
+function disableButton() {
+    const keyElements = document.getElementsByClassName("key") ;         
+                for (const keyElement of keyElements){
+                    keyElement.disabled = true;
+                    
+                }
 }
