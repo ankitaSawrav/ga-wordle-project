@@ -20,7 +20,7 @@ body {
     border-radius: 12px;
     box-shadow: inset -4px 3px 19px 9px #888888;
     /* to animate change background of keyboard from color1 to color 2 */
-    animation: move 5s infinite;
+    animation: move 5s finite;
 }
 /* to setting properties of change background of keyboard from color1 to color 2 */
 @keyframes move {
@@ -80,7 +80,7 @@ h1 {
 }
 div#modal {
     text-align: center;
-}
+}   
 h3 {
     text-align: center;
 }

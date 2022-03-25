@@ -1,8 +1,9 @@
-// const wordOfTheDay = "happy";
+//  const wordOfTheDay = "QUOLL";
+
 // select random word fron "Valid words Array"
 
 const randomNumber = Math.floor(Math.random() * validWords.length);
-console.log(validWords[randomNumber]);
+// console.log(validWords[randomNumber]);
 wordOfTheDay = validWords[randomNumber];
 
 let attemptCounter = 1;
@@ -27,7 +28,7 @@ for (const key of keyButtons) {
 
 
 function display(keyPressed, key) {
-    console.log("keyPressed:" + keyPressed)
+    // console.log("keyPressed:" + keyPressed)
     if (attemptCounter < 6 && letterCounter < 5) {
         //to put the word in 1st row in Attempt 1
         const rowDivs = document.querySelector("#row-" + `${attemptCounter}`).children;
@@ -39,12 +40,12 @@ function display(keyPressed, key) {
 }
 
 function enterLetter(key) {
-    console.log("enter is pressed")
-    console.log("attemptCounter" + attemptCounter);
-    console.log("letterCounter" + letterCounter)
+    // console.log("enter is pressed")
+    // console.log("attemptCounter" + attemptCounter);
+    // console.log("letterCounter" + letterCounter)
     //check for a valid word ................
     const selectedRow = document.querySelector("#row-" + `${attemptCounter}`);
-    console.log(selectedRow)
+    // console.log(selectedRow)
     const currentRowDivChildren = selectedRow.children
     let inputwordArray = [];
     for (let i = 0; i < currentRowDivChildren.length; i++) {
@@ -53,7 +54,7 @@ function enterLetter(key) {
         inputwordArray.push(letter)
     }
     const inputWord = inputwordArray.join("");
-    console.log(inputWord);
+    // console.log(inputWord);
     if (validWords.includes(inputWord)) {
         if (letterCounter == 5) {
             const row = document.querySelector("#row-" + `${attemptCounter}`);
@@ -65,7 +66,7 @@ function enterLetter(key) {
                     if (arrayOFWordOfTheDay[i] == selectedRowDivs[i].textContent) {
                         // selectedRowDivs[i].style.backgroundColor = "green";
                         selectedRowDivs[i].classList.add("matches")
-                        console.log(selectedRowDivs[i].textContent)
+                        // console.log(selectedRowDivs[i].textContent)
                         tochangekeyboardColor(selectedRowDivs[i].textContent, "matches");
 
                     } else {
@@ -96,8 +97,8 @@ function enterLetter(key) {
             }
             attemptCounter = attemptCounter + 1;
             letterCounter = 0;
-            console.log("attemptCounter " + attemptCounter);
-            console.log("letterCounter " + letterCounter);
+            // console.log("attemptCounter " + attemptCounter);
+            // console.log("letterCounter " + letterCounter);
         } else {
             alert("not Enough letters!!")
         }
@@ -107,25 +108,28 @@ function enterLetter(key) {
 }
 
 function deleteLetter(key) {
-    console.log(letterCounter);
+    // console.log(letterCounter);
     if (letterCounter != 0) {
         const gettingTheLetterBoxToDeleteLetter = document.querySelector("#row-" + `${attemptCounter}`).children[letterCounter - 1];
-        console.log(gettingTheLetterBoxToDeleteLetter);
+        // console.log(gettingTheLetterBoxToDeleteLetter);
         gettingTheLetterBoxToDeleteLetter.textContent = "";
         letterCounter = letterCounter - 1;
     } else {
-        console.log("no letter to delete")
+        // console.log("no letter to delete")
     }
 }
-
+// adding class match to the selected key and 
 function tochangekeyboardColor(keyLetter, value) {
-    console.log(keyLetter);
+    // console.log("hello")
+    // console.log(keyLetter);
     const keys = document.getElementsByClassName("key");
     for (const key of keys) {
         if (key.dataset["key"] == keyLetter) {
-            key.removeAttribute("class");
-            key.classList.add("key");
-            key.classList.add(value);
+            if(!key.classList.contains("matches")){
+                key.removeAttribute("class");
+                key.classList.add("key");
+                key.classList.add(value);              
+            }            
         }
     }
 }
@@ -134,14 +138,13 @@ function disableAllKeyButtons() {
     const keyElements = document.getElementsByClassName("key");
     for (const keyElement of keyElements) {
         keyElement.disabled = true;
-
     }
 }
 
 function createRefreshButton() {
-    console.log("hi")
+    // console.log("hi")
     const messageDivContainer = document.getElementById("modal");
-    console.log(messageDivContainer);
+    // console.log(messageDivContainer);
     const refreshButton = document.createElement("button")
     refreshButton.classList.add("refesh")
     refreshButton.textContent = "Play another game"

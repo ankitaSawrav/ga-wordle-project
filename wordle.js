@@ -1,16 +1,16 @@
 const wordOfTheDay = "hoppy"
-// const arrayOFWordOfTheDay = wordOfTheDay.toUpperCase();
-// console.log(arrayOFWordOfTheDay);
+const arrayOFWordOfTheDay = wordOfTheDay.toUpperCase();
+console.log(arrayOFWordOfTheDay);
 // ************logic using inputBOX.
 let attemptCounter = 0;
 
 function display(keyPressed) {
-    console.log("keyPressed:" + keyPressed)
+    // console.log("keyPressed:" + keyPressed)
     attemptCounter = attemptCounter + 1;
     const userinput = document.getElementById('input').value.toUpperCase();
     // splitting each letter in the word
     const newArrayOfletters = userinput.split("");
-    console.log(newArrayOfletters);
+    // console.log(newArrayOfletters);
     if (attemptCounter < 6) {
         //to put the word in 1st row in Attempt 1
         const rowDivs = document.querySelector("#row-" + `${attemptCounter}`).children;
@@ -34,9 +34,6 @@ function display(keyPressed) {
 }
 //Examples:   
 // The green mean letter the correct spot.
-
-
 // The letter I is in the word but in the wrong spot.
-
 
 // The letter U is not in the word in any spot.
