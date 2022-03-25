@@ -80,7 +80,7 @@ function enterLetter(key) {
                 }
             }            
             const allGuessLetterMatches = row.querySelectorAll(".matches");
-            console.log(allGuessLetterMatches);
+            // console.log(allGuessLetterMatches);
 
             if (allGuessLetterMatches.length == 5) {
                 // alert("YOU WON");
@@ -144,7 +144,7 @@ function createRefreshButton() {
     console.log(messageDivContainer);
     const refreshButton = document.createElement("button")
     refreshButton.classList.add("refesh")
-    refreshButton.textContent = "Refresh"
+    refreshButton.textContent = "Play another game"
     // document.body.appendChild(button);
     messageDivContainer.appendChild(refreshButton);
     refreshButton.addEventListener("click", function () {

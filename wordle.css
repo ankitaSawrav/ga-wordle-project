@@ -10,7 +10,6 @@ body {
     grid-template-columns: 1fr 1fr 1fr; */
 }
 .board{
-    border: 1px solid #0000ff; 
     padding: 20px;
 
 }
@@ -66,8 +65,21 @@ button.key.enter {
 }
 h1 {
     text-align: center;
+    border-width: 3px;
     border-bottom: double;
-    font-family: verdana;
+    font-family: 'Almendra', serif;
+    font-size: xxx-large;
+    margin-top: 0;
+}
+.multicoloredtext {    
+    background-image: linear-gradient(to left,indigo, green, orange, rgb(100, 96, 96));
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+div#modal {
+    text-align: center;
 }
 h3 {
     text-align: center;
