@@ -1,9 +1,11 @@
 body {
     width: 1000px;
     padding: 20px;
-    border: 2px solid grey;
+    /* border: 2px solid grey; */
     margin: auto;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: antiquewhite;
+
     /* display: grid;
     justify-self: center;
     grid-template-rows: 20% 20% 2fr 2fr;
@@ -20,12 +22,12 @@ body {
     border-radius: 12px;
     box-shadow: inset -4px 3px 19px 9px #888888;
     /* to animate change background of keyboard from color1 to color 2 */
-    animation: move 5s finite;
+    animation: move 12s infinite;
 }
 /* to setting properties of change background of keyboard from color1 to color 2 */
 @keyframes move {
-    from {background-color: rgb(85, 119, 134);}
-    to {background-color: rgb(185, 185, 214);}
+    from {background-color: rgb(180, 190, 194);}
+    to {background-color: rgb(106, 106, 110);}
   }
 
 .row{
@@ -77,12 +79,14 @@ h1 {
     -moz-background-clip: text;
     background-clip: text;
     color: transparent;
+    border-bottom: groove;
 }
 div#modal {
     text-align: center;
 }   
 h3 {
     text-align: center;
+    font-family: cursive;
 }
 .matches {
      background-color: darkgreen;
@@ -93,5 +97,17 @@ h3 {
 .absent {
     background-color: gray;
 }
-
+button.refresh {
+    border-radius: 10px;
+    border: double;
+    height: 79px;
+    width: 100px;
+    font-size: 20px;
+    border: 3px double rebeccapurple;
+    background-color: aliceblue;
+    font-family: emoji;
+}
+h2#message {
+    font-family: cursive;
+}
 

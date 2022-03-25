@@ -146,7 +146,7 @@ function createRefreshButton() {
     const messageDivContainer = document.getElementById("modal");
     // console.log(messageDivContainer);
     const refreshButton = document.createElement("button")
-    refreshButton.classList.add("refesh")
+    refreshButton.classList.add("refresh")
     refreshButton.textContent = "Play another game"
     // document.body.appendChild(button);
     messageDivContainer.appendChild(refreshButton);
